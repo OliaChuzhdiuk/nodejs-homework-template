@@ -1,11 +1,11 @@
-const {Contact} = require("../../models/contactsModel");
+const { Contact } = require("../../models/contactsModel");
 
 const { RequestError } = require("../../helpers");
 
-const removeById = async (req, res, next) => {
+const updateFavorite = async (req, res, next) => {
   try {
       const { id } = req.params;
-      const result = await Contact.findByIdAndRemove(id);
+      const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
       if (!result) {
         throw RequestError(404, "Not found");
     }
@@ -15,4 +15,4 @@ const removeById = async (req, res, next) => {
   }
 };
 
-module.exports = removeById;
+module.exports = updateFavorite;
